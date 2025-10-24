@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Weather App</title>
+<style>
+  /* ---------- RESET ---------- */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(to bottom right, #6cbef5, #b8e4ff);
+    color: #222;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .weather-app {
+    background: #fff;
+    width: 100%;
+    max-width: 900px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    overflow: hidden;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #2196f3;
+    color: white;
+    padding: 1rem;
+  }
+
+  header input {
+    flex: 1;
+    max-width: 300px;
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+  }
+
+  .units-select {
+    background: white;
+    color: #222;
+    border-radius: 6px;
+    padding: 0.4rem 0.6rem;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* ---------- CURRENT WEATHER ---------- */
+  .current-weather {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    padding: 1.5rem;
+  }
+
+  .temp {
+    font-size: 4rem;
+    font-weight: 600;
+  }
+
+  .weather-icon img {
+    width: 80px;
+  }
+
+  .details {
+    text-align: center;
+  }
+
+  /* ---------- METRICS ---------- */
+  .metrics {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background: #f4f4f4;
+    padding: 1rem;
+  }
+
+  .metric {
+    text-align: center;
+    flex: 1 1 120px;
+    margin: 0.5rem;
+    background: white;
+    border-radius: 10px;
+    padding: 0.8rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+  }
+  .metric:hover {
+    transform: translateY(-4px);
+  }
+
+  /* ---------- 7-DAY FORECAST ---------- */
+  .forecast {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 1rem;
+  }
+
+  .day {
+    flex: 0 0 auto;
+    background: white;
+    border-radius: 10px;
+    text-align: center;
+    padding: 0.8rem;
+    min-width: 100px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: background 0.3s;
+  }
+
+  .day:hover, .day:focus {
+    background: #e3f2fd;
+  }
+
+  /* ---------- HOURLY FORECAST ---------- */
+  .hourly {
+    padding: 1rem;
+  }
+
+  .day-selector {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .day-selector button {
+    padding: 0.5rem 1rem;
+    border: 1px solid #2196f3;
+    background: white;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .day-selector button:hover,
+  .day-selector button:focus {
+    background: #2196f3;
+    color: white;
+  }
+
+  .hour-list {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+  }
+
+  .hour {
+    background: white;
+    border-radius: 10px;
+    padding: 0.6rem;
+    min-width: 80px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 600px) {
+    .temp { font-size: 3rem; }
+    .metrics { flex-direction: column; align-items: center; }
+    header { flex-direction: column; gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="weather-app">
+  <header>
+    <input type="text" placeholder="Search location..." aria-label="Search for a city">
+    <select class="units-select">
+      <option>Metric (°C, km/h, mm)</option>
+      <option>Imperial (°F, mph, in)</option>
+    </select>
+  </header>
+
+  <section class="current-weather">
+    <div class="weather-icon"><img src="https://openweathermap.org/img/wn/10d@2x.png" alt="Weather icon"></div>
+    <div class="details">
+      <h2>Lahore, Pakistan</h2>
+      <div class="temp">28°C</div>
+      <p>Partly Cloudy</p>
+    </div>
+  </section>
+
+  <section class="metrics">
+    <div class="metric"><strong>Feels like:</strong> 30°C</div>
+    <div class="metric"><strong>Humidity:</strong> 60%</div>
+    <div class="metric"><strong>Wind:</strong> 15 km/h</div>
+    <div class="metric"><strong>Precipitation:</strong> 2 mm</div>
+  </section>
+
+  <section class="forecast">
+    <div class="day"><p>Mon</p><img src="https://openweathermap.org/img/wn/01d.png" alt=""><p>30°C / 22°C</p></div>
+    <div class="day"><p>Tue</p><img src="https://openweathermap.org/img/wn/02d.png" alt=""><p>29°C / 21°C</p></div>
+    <div class="day"><p>Wed</p><img src="https://openweathermap.org/img/wn/03d.png" alt=""><p>28°C / 20°C</p></div>
+    <div class="day"><p>Thu</p><img src="https://openweathermap.org/img/wn/04d.png" alt=""><p>31°C / 23°C</p></div>
+    <div class="day"><p>Fri</p><img src="https://openweathermap.org/img/wn/10d.png" alt=""><p>27°C / 19°C</p></div>
+  </section>
+
+  <section class="hourly">
+    <div class="day-selector">
+      <button>Mon</button>
+      <button>Tue</button>
+      <button>Wed</button>
+      <button>Thu</button>
+      <button>Fri</button>
+    </div>
+    <div class="hour-list">
+      <div class="hour"><p>6 AM</p><p>22°C</p></div>
+      <div class="hour"><p>9 AM</p><p>25°C</p></div>
+      <div class="hour"><p>12 PM</p><p>28°C</p></div>
+      <div class="hour"><p>3 PM</p><p>30°C</p></div>
+      <div class="hour"><p>6 PM</p><p>27°C</p></div>
+    </div>
+  </section>
+</div>
+
+</body>
+</html>
+
